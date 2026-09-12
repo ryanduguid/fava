@@ -18,9 +18,10 @@ export function fuzzytest(pattern: string, text: string): number {
   }
   let score = 0;
   let localScore = 0;
+  const codepoints = Array.from(pattern);
   let pindex = 0;
   for (const char of text) {
-    const search = pattern[pindex];
+    const search = codepoints[pindex];
     if (char === search || char.toLowerCase() === search) {
       pindex += 1;
       localScore += 1;
@@ -29,7 +30,7 @@ export function fuzzytest(pattern: string, text: string): number {
     }
     score += localScore;
   }
-  return pindex === pattern.length ? score : 0;
+  return pindex === codepoints.length ? score : 0;
 }
 
 /**
@@ -81,6 +82,7 @@ export function fuzzywrap(pattern: string, text: string): FuzzyWrappedText {
     return result;
   }
   // current index into the pattern
+  const codepoints = Array.from(pattern);
   let pindex = 0;
   // current unmatched string
   let plain: string | null = null;
@@ -88,7 +90,7 @@ export function fuzzywrap(pattern: string, text: string): FuzzyWrappedText {
   let match: string | null = null;
   const result: FuzzyWrappedText = [];
   for (const char of text) {
-    const search = pattern[pindex];
+    const search = codepoints[pindex];
     if (char === search || char.toLowerCase() === search) {
       match = match != null ? match + char : char;
       if (plain != null) {
@@ -104,7 +106,7 @@ export function fuzzywrap(pattern: string, text: string): FuzzyWrappedText {
       }
     }
   }
-  if (pindex < pattern.length) {
+  if (pindex < codepoints.length) {
     return [["text", text]];
   }
   if (plain != null) {

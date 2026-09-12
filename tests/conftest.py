@@ -187,8 +187,6 @@ def snapshot(
 
         # print strings directly, otherwise try pretty-printing
         out = data if isinstance(data, str) else pformat(data)
-        # replace today
-        out = out.replace(str(local_today()), "TODAY")
         # replace entry hashes
         out = re.sub(r'_hash": ?"[0-9a-f]+', '_hash":"ENTRY_HASH', out)
         out = re.sub(r"#context-[0-9a-f]+", "#context-ENTRY_HASH", out)
@@ -205,6 +203,8 @@ def snapshot(
                     dir_path.replace(os.sep, os.sep * 4), replacement
                 )
 
+        # A checkout path may contain today's date, so normalise paths first.
+        out = out.replace(str(local_today()), "TODAY")
         compare_snapshot(filename, out, json=json)
 
     return snapshot_data

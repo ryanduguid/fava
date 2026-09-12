@@ -30,3 +30,6 @@ might want to define a systemd unit file for it, for example::
   Type=simple
   ExecStart=/usr/bin/fava --host localhost --port 5000 --prefix /fava /path/to/your/main.beancount
   User=your-user
+
+  [Install]
+  WantedBy=multi-user.target

@@ -22,8 +22,13 @@
   class:open
   tabindex="0"
   role="menuitem"
-  onblur={() => {
-    open = false;
+  onfocusout={(event) => {
+    if (
+      !(event.relatedTarget instanceof Node) ||
+      !event.currentTarget.contains(event.relatedTarget)
+    ) {
+      open = false;
+    }
   }}
   onkeydown={(event) => {
     if (event.key === "Escape") {

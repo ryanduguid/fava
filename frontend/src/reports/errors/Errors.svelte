@@ -6,10 +6,19 @@
   import SortHeader from "../../sort/SortHeader.svelte";
   import { accounts, errors } from "../../stores/index.ts";
 
-  let account_re = $derived(new RegExp(`(${$accounts.join("|")})`));
+  let account_re = $derived(
+    $accounts.length
+      ? new RegExp(
+          `(${$accounts.toSorted((a, b) => b.length - a.length).join("|")})`,
+        )
+      : null,
+  );
 
   /** Split and extract account names to replace them with links to the account page. */
   function extract_accounts(msg: string): ["text" | "account", string][] {
+    if (account_re == null) {
+      return [["text", msg]];
+    }
     return msg
       .split(account_re)
       .map((text, index) =>

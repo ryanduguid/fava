@@ -38,9 +38,9 @@
   function drop(event: DragEvent) {
     event.preventDefault();
     const filename = event.dataTransfer?.getData("fava/filename");
-    if (filename != null) {
+    drag = false;
+    if (filename != null && filename !== "") {
       move({ account: node.name, filename });
-      drag = false;
     }
   }
 </script>

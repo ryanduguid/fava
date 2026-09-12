@@ -32,7 +32,8 @@
     }
   }
 
-  &:hover .remove-row {
+  &:hover .remove-row,
+  &:focus-within .remove-row {
     opacity: 1;
   }
 }

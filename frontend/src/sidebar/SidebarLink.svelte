@@ -23,7 +23,9 @@
   let { report, name, key, remote, bubble, children }: Props = $props();
 
   let href = $derived(remote ? report : $url_for(`${report}/`));
-  let selected = $derived(remote ? false : href.includes($pathname));
+  let selected = $derived(
+    remote ? false : $pathname.startsWith(href.split("?")[0] ?? href),
+  );
 </script>
 
 <li>

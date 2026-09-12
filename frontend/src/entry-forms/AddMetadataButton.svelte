@@ -15,7 +15,7 @@
   onclick={() => {
     meta = meta.add();
   }}
-  tabindex={-1}
+  aria-label={_("Add metadata")}
   title={_("Add metadata")}
 >
   m

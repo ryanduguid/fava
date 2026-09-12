@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Use latest node lts release
 source ~/nvm/nvm.sh

@@ -21,6 +21,12 @@
   }
 </script>
 
-<button type="button" class="muted" {onclick} title={content}>
+<button
+  type="button"
+  disabled={deleting}
+  class="muted"
+  {onclick}
+  title={content}
+>
   {content}
 </button>

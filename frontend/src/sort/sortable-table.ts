@@ -7,9 +7,16 @@ export class SortableTable extends HTMLTableElement {
     if (!this.tHead || !body) {
       return;
     }
-    const headers = [...this.tHead.querySelectorAll("th[data-sort]")];
+    const headers = [
+      ...this.tHead.querySelectorAll<HTMLTableCellElement>("th[data-sort]"),
+    ];
 
-    headers.forEach((header, index) => {
+    headers.forEach((header) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "unset";
+      button.append(...header.childNodes);
+      header.append(button);
       header.addEventListener("click", () => {
         const order =
           header.getAttribute("data-order") === "asc" ? "desc" : "asc";
@@ -24,7 +31,7 @@ export class SortableTable extends HTMLTableElement {
         sort_elements<HTMLTableRowElement>(
           body,
           [...body.querySelectorAll("tr")],
-          (tr) => tr.cells.item(index),
+          (tr) => tr.cells.item(header.cellIndex),
           get_direction(order),
           type,
         );

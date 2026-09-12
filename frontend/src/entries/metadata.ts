@@ -111,6 +111,15 @@ export class EntryMetadata {
 
   /** Set the value for a key from a string and return an updated copy. */
   set_string(key: string, value: string): EntryMetadata {
+    if (
+      typeof this.get(key) === "number" &&
+      /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(value.trim())
+    ) {
+      const number = Number(value);
+      if (Number.isFinite(number)) {
+        return this.set(key, number);
+      }
+    }
     return this.set(key, string_to_meta_value(value));
   }
 
@@ -121,6 +130,9 @@ export class EntryMetadata {
 
   /** Change a key and a return an updated copy. */
   update_key(current_key: string, new_key: string): EntryMetadata {
+    if (new_key !== current_key && Object.hasOwn(this.#meta, new_key)) {
+      return this;
+    }
     return new EntryMetadata(
       Object.fromEntries(
         Object.entries(this.#meta).map(([key, value]) => [

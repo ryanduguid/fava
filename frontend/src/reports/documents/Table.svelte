@@ -19,7 +19,7 @@
    */
   function name(doc: Document) {
     const base = basename(doc.filename);
-    return base.startsWith(doc.date) ? base.substring(11) : base;
+    return base.startsWith(`${doc.date} `) ? base.substring(11) : base;
   }
 
   const columns = [

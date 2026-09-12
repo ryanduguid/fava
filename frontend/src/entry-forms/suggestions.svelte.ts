@@ -18,6 +18,7 @@ class FetchCoalescer<T> implements FetchData<T> {
   #error_msg: (error: Error) => string;
 
   #mtime: bigint | null = null;
+  #latest_mtime: bigint | null = null;
   #inflight: Promise<void> | null = null;
 
   constructor(loader: () => Promise<T>, error_msg: (error: Error) => string) {
@@ -27,6 +28,7 @@ class FetchCoalescer<T> implements FetchData<T> {
 
   /** Fetch the data, reusing cached data or a parallel fetch operation that is in flight. */
   load(mtime: bigint): this {
+    this.#latest_mtime = mtime;
     if (this.data != null && this.#mtime === mtime) {
       return this;
     }
@@ -37,11 +39,15 @@ class FetchCoalescer<T> implements FetchData<T> {
       .then((data) => {
         this.data = data;
         this.#mtime = mtime;
-        this.#inflight = null;
       })
       .catch((error: unknown) => {
         notify_err(error, (err) => this.#error_msg(err));
+      })
+      .finally(() => {
         this.#inflight = null;
+        if (this.#latest_mtime !== null && this.#latest_mtime !== mtime) {
+          this.load(this.#latest_mtime);
+        }
       });
     return this;
   }

@@ -38,20 +38,26 @@
     if (entry.narration || entry.postings.some((p) => !p.is_empty())) {
       return;
     }
+    const source = entry;
     const transaction = await get_payee_transaction({ payee });
-    entry = transaction.set("date", entry.date);
+    if (entry === source) {
+      entry = transaction.set("date", source.date);
+    }
   }
   async function autocomplete_select_narration() {
     if (entry.payee || entry.postings.some((p) => !p.is_empty())) {
       return;
     }
+    const source = entry;
     const transaction = await get_narration_transaction({ narration });
-    entry = transaction.set("date", entry.date);
+    if (entry === source) {
+      entry = transaction.set("date", source.date);
+    }
   }
 
   // Always have one empty posting at the end.
   $effect(() => {
-    if (!entry.postings.some((p) => p.is_empty())) {
+    if (entry.postings.at(-1)?.is_empty() !== true) {
       entry = entry.set("postings", entry.postings.concat(Posting.empty()));
     }
   });

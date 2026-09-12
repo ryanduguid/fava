@@ -35,18 +35,22 @@ export const journal = new Route<JournalReportProps>(
 
     let error_shown = false;
     const pages = range(2, total_pages + 1);
+    let previous: Promise<DocumentFragment | null> = Promise.resolve(null);
     const all_pages = pages.map(async (page) => {
-      return get_journal_page({ ...filters, page, order }).then(
-        (res) => fragment_from_string(res.journal),
-        (error: unknown) => {
-          log_error(`Failed to fetch page ${page.toString()}`, error);
-          if (!error_shown) {
-            notify_err(new Error("Failed to fetch some journal pages"));
-            error_shown = true;
-          }
-          return null;
-        },
-      );
+      previous = previous
+        .then(async () => get_journal_page({ ...filters, page, order }))
+        .then(
+          (res) => fragment_from_string(res.journal),
+          (error: unknown) => {
+            log_error(`Failed to fetch page ${page.toString()}`, error);
+            if (!error_shown) {
+              notify_err(new Error("Failed to fetch some journal pages"));
+              error_shown = true;
+            }
+            return null;
+          },
+        );
+      return previous;
     });
 
     return {

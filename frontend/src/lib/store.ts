@@ -53,7 +53,7 @@ export function local_storage_synced_store<T>(
   init: () => T,
   values: () => [T, string][] = () => [],
 ): LocalStoreSyncedStore<T> {
-  if (key.startsWith("fava")) {
+  if (key.startsWith("fava-")) {
     throw new Error("INTERNAL: should be called without 'fava-' prefix.");
   }
   const full_key = `fava-${key}`;

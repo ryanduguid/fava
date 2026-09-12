@@ -39,6 +39,9 @@
     }),
   );
 
+  let request_id = 0;
+  let request_versions: Record<string, number> = {};
+
   /** Submit the current query and load the result for it. */
   function submit() {
     const query = query_string;
@@ -53,6 +56,8 @@
     }
     query_shell_history.add(query);
     router.set_search_param("query_string", query);
+    const version = ++request_id;
+    request_versions[query] = version;
     get_query({ query_string: query, ...$filter_params })
       .then(
         (res) => ok(res),
@@ -60,6 +65,9 @@
           err(error instanceof Error ? error.message : "INTERNAL ERROR"),
       )
       .then((res) => {
+        if (request_versions[query] !== version) {
+          return;
+        }
         results[query] = res;
         is_open[query] = true;
         document.querySelector("article")?.scroll(0, 0);
@@ -69,11 +77,14 @@
 
   /* Re-run all open queries on global filter change. */
   function rerun_all_open() {
+    request_versions = {};
     const to_rerun = Object.entries(is_open)
       .filter(([, is_open]) => is_open)
       .map(([query]) => query);
     results = {};
     for (const query of to_rerun) {
+      const version = ++request_id;
+      request_versions[query] = version;
       get_query({ query_string: query, ...$filter_params })
         .then(
           (res) => ok(res),
@@ -81,6 +92,9 @@
             err(error instanceof Error ? error.message : "INTERNAL ERROR"),
         )
         .then((res) => {
+          if (request_versions[query] !== version) {
+            return;
+          }
           results[query] = res;
         })
         .catch(log_error);

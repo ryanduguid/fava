@@ -73,9 +73,24 @@
   const extract_importer = $derived($search_params.get("extract_importer"));
 
   /** Load the entries to extract for given file and importer. */
-  async function load_extract(filename: string, importer: string) {
+  let extraction_generation = 0;
+  async function load_extract(
+    filename: string,
+    importer: string,
+    generation: number,
+  ) {
     try {
-      entries = await loading_state.await(get_extract({ filename, importer }));
+      const extracted = await loading_state.await(
+        get_extract({ filename, importer }),
+      );
+      if (
+        generation !== extraction_generation ||
+        filename !== extract_filename ||
+        importer !== extract_importer
+      ) {
+        return;
+      }
+      entries = extracted;
       if (entries.length) {
         extract_cache.set(`${filename}:${importer}`, entries);
       } else {
@@ -88,6 +103,7 @@
 
   // Load the entries to extract if the URL parameters are set.
   $effect(() => {
+    const generation = ++extraction_generation;
     if (extract_filename != null && extract_importer != null) {
       const cached = extract_cache.get(
         `${extract_filename}:${extract_importer}`,
@@ -95,7 +111,9 @@
       if (cached) {
         entries = cached;
       } else {
-        load_extract(extract_filename, extract_importer).catch(log_error);
+        load_extract(extract_filename, extract_importer, generation).catch(
+          log_error,
+        );
       }
     } else {
       entries = [];
@@ -121,13 +139,29 @@
    * Save the current entries.
    */
   async function save() {
-    const without_duplicates = entries.filter((e) => !e.is_duplicate());
-    if (extract_filename != null && extract_importer != null) {
-      extract_cache.delete(`${extract_filename}:${extract_importer}`);
-    }
-    close_extract();
+    const reviewed_entries = entries;
+    const filename = extract_filename;
+    const importer = extract_importer;
+    const without_duplicates = reviewed_entries.filter(
+      (e) => !e.is_duplicate(),
+    );
     if (is_non_empty(without_duplicates)) {
-      await save_entries(without_duplicates);
+      try {
+        await save_entries(without_duplicates);
+      } catch {
+        // save_entries has reported the error; keep the reviewed entries open.
+        return;
+      }
+    }
+    if (filename != null && importer != null) {
+      extract_cache.delete(`${filename}:${importer}`);
+    }
+    if (
+      filename === extract_filename &&
+      importer === extract_importer &&
+      reviewed_entries === entries
+    ) {
+      close_extract();
     }
   }
 </script>
