@@ -3,7 +3,7 @@
   position: fixed;
   top: 60px;
   right: 10px;
-  width: 400px;
+  width: min(400px, calc(100vw - 20px));
 }
 
 .notifications li {

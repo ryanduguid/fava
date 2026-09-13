@@ -19,23 +19,22 @@
   let { title, selected = false, action, children, right }: Props = $props();
 </script>
 
-<li
-  class:selected
-  {title}
-  role="menuitem"
-  onclick={action}
-  onkeydown={(event) => {
-    if (event.key === "Enter") {
-      action();
-    }
-  }}
->
-  {@render children()}
-  {#if right}
-    <span>
-      {@render right()}
-    </span>
-  {/if}
+<li role="presentation">
+  <button
+    type="button"
+    class="unset"
+    class:selected
+    {title}
+    role="menuitem"
+    onclick={action}
+  >
+    {@render children()}
+    {#if right}
+      <span>
+        {@render right()}
+      </span>
+    {/if}
+  </button>
 </li>
 
 <style>
@@ -43,7 +42,8 @@
     content: "›";
   }
 
-  li {
+  button {
+    width: 100%;
     padding: 0.25em 0.5em;
   }
 
@@ -51,8 +51,8 @@
     float: right;
   }
 
-  li:hover,
-  li:focus-visible {
+  button:hover,
+  button:focus-visible {
     background-color: var(--background-darkest);
   }
 </style>

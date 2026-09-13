@@ -69,7 +69,6 @@
         remove(file.name).catch(log_error);
       }}
       title={_("Delete")}
-      tabindex={-1}
     >
       ×
     </button>

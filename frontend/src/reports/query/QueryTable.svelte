@@ -72,7 +72,7 @@
               {#if $accounts_set.has(value)}
                 <a href={$url_for_account(value)}>{value}</a>
                 <AccountIndicator account={value} small />
-              {:else if value.length === 32 && /[a-z0-9]/.test(value)}
+              {:else if /^[a-f0-9]{32}$/.test(value)}
                 <a href={`#context-${value}`}>{value}</a>
               {:else}
                 {value}

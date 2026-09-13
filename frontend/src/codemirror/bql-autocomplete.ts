@@ -25,11 +25,12 @@ const command_completions = [
 
 export const bql_completion: CompletionSource = (context) => {
   const token = context.matchBefore(/\w+/);
-  if (!token) {
+  if (!token && !context.explicit) {
     return null;
   }
-  if (token.from === 0) {
-    return { from: token.from, options: command_completions };
+  const from = token?.from ?? context.pos;
+  if (!context.state.sliceDoc(0, from).trim()) {
+    return { from, options: command_completions };
   }
-  return { from: token.from, options: columns_functions_keywords };
+  return { from, options: columns_functions_keywords };
 };

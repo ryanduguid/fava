@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EntryMetadata, Posting } from "../entries/index.ts";
+  import { _ } from "../i18n.ts";
   import AccountInput from "./AccountInput.svelte";
   import AddMetadataButton from "./AddMetadataButton.svelte";
   import AmountInput from "./AmountInput.svelte";
@@ -74,7 +75,7 @@
     type="button"
     class="muted round remove-row"
     onclick={remove}
-    tabindex={-1}
+    aria-label={_("Remove posting")}
   >
     ×
   </button>

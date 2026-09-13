@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 
 import { Amount } from "../../entries/index.ts";
 import { Position } from "../../entries/position.ts";
-import { collect } from "../../lib/result.ts";
+import { collect, err } from "../../lib/result.ts";
 import type { ValidationT, Validator } from "../../lib/validation.ts";
 import {
   array,
@@ -19,6 +19,7 @@ import {
   string,
   tagged_union,
   unknown,
+  ValidationError,
 } from "../../lib/validation.ts";
 import { NumberColumn, StringColumn } from "../../sort/index.ts";
 
@@ -201,7 +202,11 @@ export const query_table_validator: Validator<QueryResultTable> = (
 
     const parsed_rows = collect(
       rows.map((row) =>
-        collect(validators.map((validator, index) => validator(row[index]))),
+        row.length === validators.length
+          ? collect(validators.map((validator, index) => validator(row[index])))
+          : err(
+              new ValidationError("Query row does not match its column count"),
+            ),
       ),
     );
 

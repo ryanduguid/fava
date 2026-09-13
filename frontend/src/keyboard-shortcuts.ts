@@ -27,6 +27,7 @@ type UppercaseLetter =
   | "H"
   | "I"
   | "J"
+  | "K"
   | "L"
   | "M"
   | "N"

@@ -90,6 +90,7 @@ async function run_build(dev: boolean) {
     console.log("finished build");
   } catch (err: unknown) {
     console.error("build failed", err);
+    throw err;
   } finally {
     await ctx.dispose();
   }
@@ -102,5 +103,6 @@ if (is_main) {
 
   run_build(dev).catch((e: unknown) => {
     console.error(e);
+    process.exitCode = 1;
   });
 }

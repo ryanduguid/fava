@@ -62,7 +62,7 @@ mypy:
 	uv run --no-dev --group types mypy
 
 # Run tests.
-.PHONY: test test-js test-py test-py-old-deps
+.PHONY: test test-js test-py test-py-old-deps test-py-typeguard
 test: test-js test-py
 test-js: frontend/node_modules
 	cd frontend; npm run test

@@ -3,7 +3,7 @@
 ## Basic
 
 The Dockerfile in this directory is enough to get started running Fava in a
-container. This guide is meant as a compliment to the great documentation found
+container. This guide is meant as a complement to the great documentation found
 at https://docs.docker.com/.
 
 ### Building
@@ -55,27 +55,21 @@ Oauth is an authentication standard that makes it easy to authenticate using a
 third party account. Using oauth means we can limit access to our site without
 requiring mobile users to enter complicated passwords.
 
-We will be using bitly's [oauth2_proxy](https://github.com/bitly/oauth2_proxy)
-to manage access to our site.
-
-I recommend using the
-[skippy/oauth2_proxy](https://hub.docker.com/r/skippy/oauth2_proxy/) Docker
-image. It is an alpinelinux-based Docker image with bitly's oauth2_proxy
-packaged. It uses an older version of oauth2_proxy, which is fine enough for
-Fava, but it is left as an exercise to the reader to build an updated version.
+Use [OAuth2 Proxy](https://github.com/oauth2-proxy/oauth2-proxy) and its
+official `quay.io/oauth2-proxy/oauth2-proxy` image to manage access to Fava.
 
 It can be configured entirely using command line flags, but it is generally
 easier to configure using a file.
 
 Follow the Google Auth Provider instructions in the
-[oauth2_proxy](https://github.com/bitly/oauth2_proxy) README to generate a
-Client ID and Client Secret and fill out the `oauth2_proxy.cfg`.
+[oauth2_proxy](https://github.com/oauth2-proxy/oauth2-proxy) README to generate
+a Client ID and Client Secret and fill out the `oauth2_proxy.cfg`.
 
 The file will look something like this:
 
 ```
 ## OAuth2 Proxy Config File
-## https://github.com/bitly/oauth2_proxy
+## https://github.com/oauth2-proxy/oauth2-proxy
 
 ## <addr>:<port> to listen on for HTTP/HTTPS clients
 # http_address = "127.0.0.1:4180"
@@ -164,7 +158,7 @@ docker run --detach --link beancount --publish 4180:4180 \
   --env "VIRTUAL_HOST=<your domain>" \
   --env "LETSENCRYPT_HOST=<your domain>" \
   --env "LETSENCRYPT_EMAIL=<your email>" \
-  skippy/oauth2_proxy -config=/etc/oauth2_proxy.cfg \
+  quay.io/oauth2-proxy/oauth2-proxy -config=/etc/oauth2_proxy.cfg \
   -http-address="0.0.0.0:4180" -provider=google
 ```
 
@@ -180,7 +174,8 @@ Let's document the new arguments:
    Let's Encrypt SSL certificates. Without a Let's Encrypt certificate, your
    oauth2_proxy cookie will be visible to anyone who can see your network
    traffic. You don't want this.
-1. Everything after the `skippy/oauth2_proxy` are arguments to oauth2_proxy.
+1. Everything after the `quay.io/oauth2-proxy/oauth2-proxy` are arguments to
+   oauth2_proxy.
 
 This will start an oauth2 proxy using your config to do authentication using
 Google's OAuth service. It's important that you don't try to access your service

@@ -54,6 +54,9 @@
 
   async function save(event?: SubmitEvent) {
     event?.preventDefault();
+    if (saving) {
+      return;
+    }
     saving = true;
     try {
       sha256sum = await put_source_slice({
@@ -79,8 +82,9 @@
         await save_entries([duplicated_entry]);
       }
       router.close_overlay();
-    } finally {
       duplicated_entry = undefined;
+    } catch {
+      // save_entries reports the failure; retain the entry for another attempt.
     }
   }
 

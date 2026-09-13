@@ -16,7 +16,7 @@
 
 <button
   type="submit"
-  disabled={!changed}
+  disabled={!changed || saving}
   {@attach keyboardShortcut({ key: "Control+s", mac: "Meta+s" })}
 >
   {buttonContent}

@@ -27,9 +27,23 @@
   };
 
   $effect(() => {
-    fetch_text(url).then(set_editor_content, () => {
-      set_editor_content(`Loading ${url} failed...`);
-    });
+    let active = true;
+    const requested_url = url;
+    fetch_text(requested_url).then(
+      (text) => {
+        if (active) {
+          set_editor_content(text);
+        }
+      },
+      () => {
+        if (active) {
+          set_editor_content(`Loading ${requested_url} failed...`);
+        }
+      },
+    );
+    return () => {
+      active = false;
+    };
   });
 </script>
 

@@ -4,6 +4,13 @@ export class CopyableText extends HTMLElement {
   constructor() {
     super();
 
+    this.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        event.stopPropagation();
+        this.click();
+      }
+    });
     this.addEventListener("click", (event) => {
       const text = this.getAttribute("data-clipboard-text");
       if (text != null) {
@@ -11,5 +18,10 @@ export class CopyableText extends HTMLElement {
       }
       event.stopPropagation();
     });
+  }
+
+  connectedCallback(): void {
+    this.tabIndex = 0;
+    this.setAttribute("role", "button");
   }
 }

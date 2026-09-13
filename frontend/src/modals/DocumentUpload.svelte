@@ -96,7 +96,13 @@
       // Links are being dropped
       const url = dataTransfer.getData("URL");
       // Try to extract the filename from the URL.
-      let filename = new URL(url).searchParams.get("filename");
+      let parsed: URL;
+      try {
+        parsed = new URL(url);
+      } catch {
+        return;
+      }
+      let filename = parsed.searchParams.get("filename");
       const entry_hash = dragover.getAttribute("data-entry-hash");
       if (filename != null && entry_hash != null) {
         if (document_has_account(filename, target_account)) {

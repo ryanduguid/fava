@@ -17,12 +17,19 @@ export class NonRelativeUrlPathError extends Error {
  */
 export function get_url_path(
   url: Pick<URL | Location, "pathname">,
-): Result<string, NonRelativeUrlPathError> {
+): Result<string, NonRelativeUrlPathError | URIError> {
   const { pathname } = url;
   const $base_url = store_get(base_url);
-  return $base_url && pathname.startsWith($base_url)
-    ? ok(decodeURI(pathname.slice($base_url.length)))
-    : err(new NonRelativeUrlPathError(pathname, $base_url));
+  if (!$base_url || !pathname.startsWith($base_url)) {
+    return err(new NonRelativeUrlPathError(pathname, $base_url));
+  }
+  try {
+    return ok(decodeURI(pathname.slice($base_url.length)));
+  } catch (error) {
+    return err(
+      error instanceof URIError ? error : new URIError("Invalid URL path"),
+    );
+  }
 }
 
 /**

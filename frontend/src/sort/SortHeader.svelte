@@ -19,13 +19,18 @@
 
 {#if is_sortable}
   <th
-    onclick={() => {
-      sorter = sorter.switch_column(column);
-    }}
     data-order={column === sorter.column ? sorter.order : undefined}
     data-sort
   >
-    {column.name}
+    <button
+      type="button"
+      class="unset"
+      onclick={() => {
+        sorter = sorter.switch_column(column);
+      }}
+    >
+      {column.name}
+    </button>
   </th>
 {:else}
   <th>

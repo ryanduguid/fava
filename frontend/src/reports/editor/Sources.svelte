@@ -42,8 +42,8 @@
     <button
       type="button"
       title="Beancount data root directory
-Shift-Click to expand/collapse immediate directories
-Ctrl-/Cmd-/Meta-Click to expand/collapse all directories."
+Shift-Click to expand/collapse all descendant directories
+Ctrl-/Cmd-/Meta-Click to expand/collapse immediate child directories."
       class="unset root"
       onclick={action}
     >

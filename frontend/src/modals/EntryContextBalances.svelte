@@ -2,7 +2,7 @@
   import { url_for_account } from "../helpers.ts";
   import { _ } from "../i18n.ts";
 
-  type ContextBalance = Record<string, string[]>;
+  type ContextBalance = Record<string, string[] | undefined>;
   interface Props {
     balances_before: ContextBalance;
     balances_after: ContextBalance | null;
@@ -40,14 +40,14 @@
           <tr>
             <td><a href={$url_for_account(account)}>{account}</a></td>
             <td class="num">
-              {#each balances_before[account] as amount (amount)}
+              {#each balances_before[account] ?? [] as amount (amount)}
                 {amount}
                 <br />
               {/each}
             </td>
             {#if balances_after}
               <td class="num">
-                {#each balances_after[account] as amount (amount)}
+                {#each balances_after[account] ?? [] as amount (amount)}
                   {amount}
                   <br />
                 {/each}

@@ -48,21 +48,21 @@ msgid "Saving…"
 msgstr ""
 
 #: frontend/src/editor/SaveButton.svelte:14
-#: frontend/src/editor/SliceEditor.svelte:156
+#: frontend/src/editor/SliceEditor.svelte:160
 #: frontend/src/modals/AddEntry.svelte:67
 #: frontend/src/reports/import/Extract.svelte:115
 msgid "Save"
 msgstr ""
 
-#: frontend/src/editor/SliceEditor.svelte:138
+#: frontend/src/editor/SliceEditor.svelte:142
 msgid "Duplicate"
 msgstr ""
 
-#: frontend/src/editor/SliceEditor.svelte:144
+#: frontend/src/editor/SliceEditor.svelte:148
 msgid "reload"
 msgstr ""
 
-#: frontend/src/editor/SliceEditor.svelte:152
+#: frontend/src/editor/SliceEditor.svelte:156
 #: frontend/src/modals/AddEntry.svelte:46
 msgid "Add"
 msgstr ""
@@ -72,7 +72,7 @@ msgid "Should be one of the declared accounts"
 msgstr ""
 
 #: frontend/src/entry-forms/AccountInput.svelte:39
-#: frontend/src/modals/DocumentUpload.svelte:192
+#: frontend/src/modals/DocumentUpload.svelte:198
 #: frontend/src/modals/EntryContextBalances.svelte:31
 #: frontend/src/reports/holdings/Holdings.svelte:25
 #: frontend/src/reports/holdings/Holdings.svelte:29
@@ -81,6 +81,7 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
+#: frontend/src/entry-forms/AddMetadataButton.svelte:18
 #: frontend/src/entry-forms/AddMetadataButton.svelte:19
 #: frontend/src/entry-forms/EntryMetadata.svelte:53
 #: frontend/src/entry-forms/EntryMetadata.svelte:54
@@ -108,6 +109,10 @@ msgstr ""
 msgid "Currency"
 msgstr ""
 
+#: frontend/src/entry-forms/EntryMetadata.svelte:22
+msgid "Remove metadata"
+msgstr ""
+
 #: frontend/src/entry-forms/EntryMetadata.svelte:29
 #: frontend/src/reports/options/OptionsTable.svelte:14
 msgid "Key"
@@ -123,19 +128,23 @@ msgstr ""
 msgid "Note"
 msgstr ""
 
-#: frontend/src/entry-forms/Transaction.svelte:83
-#: frontend/src/entry-forms/Transaction.svelte:85
+#: frontend/src/entry-forms/Posting.svelte:78
+msgid "Remove posting"
+msgstr ""
+
+#: frontend/src/entry-forms/Transaction.svelte:89
+#: frontend/src/entry-forms/Transaction.svelte:91
 #: frontend/src/reports/journal/JournalHeaders.svelte:51
 msgid "Payee"
 msgstr ""
 
-#: frontend/src/entry-forms/Transaction.svelte:96
-#: frontend/src/entry-forms/Transaction.svelte:98
+#: frontend/src/entry-forms/Transaction.svelte:102
+#: frontend/src/entry-forms/Transaction.svelte:104
 #: frontend/src/reports/journal/JournalHeaders.svelte:51
 msgid "Narration"
 msgstr ""
 
-#: frontend/src/entry-forms/Transaction.svelte:126
+#: frontend/src/entry-forms/Transaction.svelte:132
 #: frontend/src/reports/journal/JournalFilters.svelte:44
 msgid "Postings"
 msgstr ""
@@ -173,19 +182,19 @@ msgstr ""
 msgid "Context"
 msgstr ""
 
-#: frontend/src/modals/DocumentUpload.svelte:167
+#: frontend/src/modals/DocumentUpload.svelte:173
 msgid "Upload file(s)"
 msgstr ""
 
-#: frontend/src/modals/DocumentUpload.svelte:169
+#: frontend/src/modals/DocumentUpload.svelte:175
 msgid "Files"
 msgstr ""
 
-#: frontend/src/modals/DocumentUpload.svelte:184
+#: frontend/src/modals/DocumentUpload.svelte:190
 msgid "Documents folder"
 msgstr ""
 
-#: frontend/src/modals/DocumentUpload.svelte:195
+#: frontend/src/modals/DocumentUpload.svelte:201
 #: frontend/src/reports/import/ImportFileUpload.svelte:36
 msgid "Upload"
 msgstr ""
@@ -211,7 +220,7 @@ msgstr ""
 msgid "Download currently filtered entries as a Beancount file"
 msgstr ""
 
-#: frontend/src/reports/errors/Errors.svelte:24
+#: frontend/src/reports/errors/Errors.svelte:33
 #: frontend/src/reports/route.ts:102
 msgid "Error"
 msgstr ""
@@ -259,7 +268,7 @@ msgid "Move or rename document"
 msgstr ""
 
 #: frontend/src/reports/documents/Documents.svelte:80
-#: frontend/src/reports/import/FileList.svelte:108
+#: frontend/src/reports/import/FileList.svelte:107
 msgid "Move"
 msgstr ""
 
@@ -273,7 +282,7 @@ msgid "Documents"
 msgstr ""
 
 #: frontend/src/reports/editor/EditorMenu.svelte:42
-#: frontend/src/reports/errors/Errors.svelte:22
+#: frontend/src/reports/errors/Errors.svelte:31
 msgid "File"
 msgstr ""
 
@@ -308,17 +317,17 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: frontend/src/reports/errors/Errors.svelte:23
+#: frontend/src/reports/errors/Errors.svelte:32
 #: frontend/src/reports/import/Extract.svelte:121
 msgid "Line"
 msgstr ""
 
-#: frontend/src/reports/errors/Errors.svelte:49
+#: frontend/src/reports/errors/Errors.svelte:58
 #, python-format
 msgid "Show source %(file)s:%(lineno)s"
 msgstr ""
 
-#: frontend/src/reports/errors/Errors.svelte:77
+#: frontend/src/reports/errors/Errors.svelte:86
 msgid "No errors."
 msgstr ""
 
@@ -401,27 +410,27 @@ msgstr ""
 msgid "Delete this file?"
 msgstr ""
 
-#: frontend/src/reports/import/FileList.svelte:121
+#: frontend/src/reports/import/FileList.svelte:120
 msgid "Continue"
 msgstr ""
 
-#: frontend/src/reports/import/FileList.svelte:121
+#: frontend/src/reports/import/FileList.svelte:120
 msgid "Extract"
 msgstr ""
 
-#: frontend/src/reports/import/FileList.svelte:130
+#: frontend/src/reports/import/FileList.svelte:129
 msgid "Clear"
 msgstr ""
 
-#: frontend/src/reports/import/Import.svelte:146
+#: frontend/src/reports/import/Import.svelte:180
 msgid "No files were found for import."
 msgstr ""
 
-#: frontend/src/reports/import/Import.svelte:149
+#: frontend/src/reports/import/Import.svelte:183
 msgid "Importable Files"
 msgstr ""
 
-#: frontend/src/reports/import/Import.svelte:161
+#: frontend/src/reports/import/Import.svelte:195
 msgid "Non-importable Files"
 msgstr ""
 
@@ -483,7 +492,7 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: frontend/src/reports/journal/index.ts:58
+#: frontend/src/reports/journal/index.ts:62
 #: frontend/src/sidebar/AsideContents.svelte:33
 msgid "Journal"
 msgstr ""

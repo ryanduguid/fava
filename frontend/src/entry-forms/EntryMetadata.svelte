@@ -19,7 +19,7 @@
       onclick={() => {
         meta = meta.delete(key);
       }}
-      tabindex={-1}
+      aria-label={_("Remove metadata")}
     >
       ×
     </button>

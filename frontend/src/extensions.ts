@@ -93,8 +93,10 @@ class ExtensionData {
 async function load_extension_module(name: string): Promise<ExtensionData> {
   const $url_for_raw = store_get(url_for_raw);
   const url = $url_for_raw(`extension_js_module/${name}.js`);
-  const mod = await (import(url) as Promise<{ default?: ExtensionModule }>);
-  if (typeof mod.default === "object") {
+  const mod = await (import(url) as Promise<{
+    default?: ExtensionModule | null;
+  }>);
+  if (mod.default !== null && typeof mod.default === "object") {
     return new ExtensionData(mod.default, { api: new ExtensionApiImpl(name) });
   }
   throw new Error(
@@ -111,9 +113,11 @@ async function get_or_init_extension(name: string): Promise<ExtensionData> {
   if (loaded_ext) {
     return loaded_ext;
   }
-  const ext_promise = load_extension_module(name);
+  const ext_promise = load_extension_module(name).then(async (extension) => {
+    await extension.init();
+    return extension;
+  });
   loaded_extensions.set(name, ext_promise);
-  await (await ext_promise).init();
   return ext_promise;
 }
 
