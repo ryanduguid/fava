@@ -203,7 +203,7 @@ def calculate_budget_children(
     currency_dict: dict[str, Decimal] = Counter()  # type: ignore[assignment]  # ty:ignore[invalid-assignment]
 
     for child in budgets:
-        if child.startswith(account):
+        if child == account or child.startswith(f"{account}:"):
             currency_dict.update(
                 calculate_budget(budgets, child, date_from, date_to),
             )

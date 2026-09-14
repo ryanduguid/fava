@@ -145,3 +145,23 @@ def test_budgets_children(budgets_doc: BudgetDict) -> None:
         date(2017, 1, 2),
     )
     assert budget["USD"] == Decimal("2.00")
+
+
+def test_budgets_children_excludes_similar_siblings(
+    budgets_doc: BudgetDict,
+) -> None:
+    """
+    2017-01-01 custom "budget" Expenses:Food "daily" 10.00 USD
+    2017-01-01 custom "budget" Expenses:Food:Restaurants "daily" 20.00 USD
+    2017-01-01 custom "budget" Expenses:FoodDelivery "daily" 100.00 USD
+    """
+    for account, expected in [
+        ("Expenses:Food", "30"),
+        ("Expenses:Food:Restaurants", "20"),
+        ("Expenses:FoodDelivery", "100"),
+        ("Expenses", "130"),
+    ]:
+        budget = calculate_budget_children(
+            budgets_doc, account, date(2017, 1, 1), date(2017, 1, 2)
+        )
+        assert budget == {"USD": Decimal(expected)}
