@@ -36,13 +36,16 @@ After any changes to the Javascript code, you will need to re-build the
 frontend, which you can do by running ``make``. If you are working on the
 frontend code, you can use ``make watch`` to rerun the build on file changes.
 
-If you need a newer version of Beancount than the latest released one, you can
-install from source like so (more details `here
-<http://furius.ca/beancount/doc/install>`_):
+For a source build of Beancount, choose a revision whose package version meets
+the ``beancount>=3.2.0,<4`` requirement in ``pyproject.toml``. For example:
 
 .. code:: bash
 
-    pip install git+https://github.com/beancount/beancount@v2
+    uv pip install git+https://github.com/beancount/beancount@3.2.0
+    uv pip check
+
+For an unreleased change, replace the tag with a reviewed commit from the
+compatible version series and check its package version before installing it.
 
 Contributions are very welcome, just open a PR on `GitHub`_.
 

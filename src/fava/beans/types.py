@@ -3,17 +3,14 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from typing import TYPE_CHECKING
+from decimal import Decimal  # noqa: TC003 - runtime TypedDict validation
 from typing import TypedDict
+
+from beancount.core import data  # noqa: TC002 - runtime TypedDict validation
+from beancount.core.display_context import DisplayContext  # noqa: TC002
 
 from fava.beans.abc import Directive
 from fava.helpers import BeancountError
-
-if TYPE_CHECKING:  # pragma: no cover
-    from decimal import Decimal
-
-    from beancount.core import data
-    from beancount.core.display_context import DisplayContext
 
 
 class BeancountOptions(TypedDict):
