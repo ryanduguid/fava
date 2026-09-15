@@ -53,6 +53,7 @@ def _portfolio_data(nodes: list[TreeNode]) -> QueryResultTable:
     Returns:
         A QueryResultTable for the portfolio.
     """
+    # Allocation is undefined when selected balances total zero.
     currency = g.ledger.options["operating_currency"][0]
     account_balances: list[tuple[str, Decimal | None]] = []
     total = Decimal()
@@ -75,7 +76,11 @@ def _portfolio_data(nodes: list[TreeNode]) -> QueryResultTable:
             (
                 account,
                 balance,
-                (round((balance / total) * 100, 2) if balance else None),
+                (
+                    round((balance / total) * 100, 2)
+                    if balance and total
+                    else None
+                ),
             )
             for account, balance in account_balances
         ],
