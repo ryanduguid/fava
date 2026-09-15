@@ -212,11 +212,11 @@ msgstr "上傳"
 
 #: frontend/src/modals/EntryContextBalances.svelte:32
 msgid "Balances before entry"
-msgstr "在此項目前的損益"
+msgstr "在此項目前的餘額"
 
 #: frontend/src/modals/EntryContextBalances.svelte:34
 msgid "Balances after entry"
-msgstr "在此項目後的損益"
+msgstr "在此項目後的餘額"
 
 #: frontend/src/modals/EntryContextLocation.svelte:14
 msgid "Location"

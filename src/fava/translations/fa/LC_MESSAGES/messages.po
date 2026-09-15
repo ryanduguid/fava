@@ -383,7 +383,7 @@ msgstr "منابع‌توسط"
 #: frontend/src/reports/holdings/Holdings.svelte:45
 #: frontend/src/reports/holdings/Holdings.svelte:49
 msgid "Cost currency"
-msgstr "قیمت ارز"
+msgstr "ارز بهای تمام‌شده"
 
 #: frontend/src/reports/holdings/Holdings.svelte:56
 #: frontend/src/reports/query/index.ts:16

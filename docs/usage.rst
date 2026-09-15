@@ -14,6 +14,10 @@ Beancount, see the `Beancount Documentation
 <https://docs.google.com/document/d/1RaondTJCS_IUPBHFNdT8oqFKJjVJDsfsn6JEjBG04eA>`_
 page for an index of the available documentation.
 
+The getting-started guide overstates the date-format restriction: Beancount
+accepts both ``YYYY-MM-DD`` and ``YYYY/MM/DD``. Hyphenated ISO dates remain
+a suitable convention.
+
 Installation
 ------------
 
