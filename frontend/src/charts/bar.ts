@@ -67,8 +67,7 @@ export class BarChart {
       stack<BarChartDatum, string>()
         .keys(this.accounts)
         .value((d, account) => d.account_balances[account]?.[currency] ?? 0)
-        .offset(stackOffsetDiverging)(bar_groups)
-        .filter((b) => b[0] !== b[1] && !Number.isNaN(b[1])),
+        .offset(stackOffsetDiverging)(bar_groups),
     ]);
   }
 
