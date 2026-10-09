@@ -8,6 +8,16 @@
    :alt: PyPI - Version
    :target: https://pypi.org/project/fava/
 
+**Fork status**
+
+.. image:: https://app.codacy.com/project/badge/Grade/2625fcca30f74de7999b0d0904bf51d9?branch=main
+   :target: https://app.codacy.com/gh/ryanduguid/fava/dashboard
+   :alt: Fork code quality
+
+.. image:: https://github.com/ryanduguid/fava/actions/workflows/test.yml/badge.svg?branch=main
+   :target: https://github.com/ryanduguid/fava/actions/workflows/test.yml
+   :alt: Fork Test
+
 Fava is a web interface for the double-entry bookkeeping software `Beancount
 <http://furius.ca/beancount/>`__ with a focus on features and usability.
 
