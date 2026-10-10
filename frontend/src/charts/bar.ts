@@ -60,7 +60,7 @@ export class BarChart {
     this.bar_groups = bar_groups;
     this.accounts = Array.from(
       new Set(bar_groups.map((d) => Object.keys(d.account_balances)).flat(2)),
-    ).sort();
+    ).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
     this.stacks = currencies.map((currency) => [
       currency,
