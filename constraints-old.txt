@@ -134,7 +134,7 @@ texttable==1.0.0
     #   pyexcel
 watchfiles==0.20.0
     # via fava (pyproject.toml)
-werkzeug==2.2.0
+werkzeug==3.1.9
     # via
     #   fava (pyproject.toml)
     #   flask
