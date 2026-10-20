@@ -1,20 +1,20 @@
-.. image:: https://img.shields.io/gitter/room/beancount/fava
+.. image:: https://img.shields.io/gitter/room/beancount/fava?style=flat&labelColor=000000&color=66023C
    :alt: Join the chat at https://gitter.im/beancount/fava
    :target: https://gitter.im/beancount/fava
-.. image:: https://img.shields.io/pypi/l/fava
+.. image:: https://img.shields.io/pypi/l/fava?style=flat&labelColor=000000&color=66023C
    :alt: PyPI - License
    :target: https://github.com/beancount/fava/blob/main/LICENSE
-.. image:: https://img.shields.io/pypi/v/fava
+.. image:: https://img.shields.io/pypi/v/fava?style=flat&labelColor=000000&color=66023C
    :alt: PyPI - Version
    :target: https://pypi.org/project/fava/
 
 **Fork status**
 
-.. image:: https://app.codacy.com/project/badge/Grade/2625fcca30f74de7999b0d0904bf51d9?branch=main
+.. image:: https://img.shields.io/codacy/grade/2625fcca30f74de7999b0d0904bf51d9/main?style=flat&labelColor=000000
    :target: https://app.codacy.com/gh/ryanduguid/fava/dashboard
    :alt: Fork code quality
 
-.. image:: https://github.com/ryanduguid/fava/actions/workflows/test.yml/badge.svg?branch=main
+.. image:: https://img.shields.io/github/actions/workflow/status/ryanduguid/fava/test.yml?branch=main&label=Test&style=flat&labelColor=000000
    :target: https://github.com/ryanduguid/fava/actions/workflows/test.yml
    :alt: Fork Test
 
