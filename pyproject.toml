@@ -114,9 +114,11 @@ constraint-dependencies = [
 ]
 
 [tool.uv.exclude-newer-package]
-# Admit the GHSA-6q48-6c7w-9gw2 fix before the 7-day quarantine expires.
-# Remove this exception after 2026-10-27 and regenerate the lock.
-certifi = "2026-10-21T00:00:00Z"
+# Dependabot runs `uv lock --upgrade-package certifi==<version>`. The 7-day
+# exclude-newer window hides that release, so every universal-lock split fails
+# (first reported: python_full_version >= '3.15') while the updater is on
+# CPython 3.10. Opt certifi out of the cooldown so the pin can resolve.
+certifi = false
 
 [tool.hatch.version]
 source = "vcs"
